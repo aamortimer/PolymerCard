@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>simple-card demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../simple-card.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic simple-card demo</h3>
+      <demo-snippet>
+        <template>
+          <simple-card heading="Test Card" image="http://lorempixel.com/600/400" alt="test" preload fade></simple-card>
+        </template>
+      </demo-snippet>
+
+      <h3>Basic simple-card demo2</h3>
+      <demo-snippet>
+        <template>
+          <simple-card heading="Test Card" image="http://lorempixel.com/600/400" alt="test" preload fade>
+            <div class="card-content">
+              <h1>Some Hotel</h1>
+              <p>lorem text</p>
+            </div>
+          </simple-card>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

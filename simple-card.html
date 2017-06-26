@@ -1,0 +1,135 @@
+<link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="bower_components/iron-image/iron-image.html">
+
+<dom-module id="simple-card">
+	<template>
+		<style>
+			:host {
+				display: block;
+			}
+
+			.card {
+				border: 1px solid #ccc;
+				padding: .5em;
+				
+			}
+			
+			.header {
+				position: relative;
+			}
+
+			.title-text {
+				padding: 16px;
+        		font-weight: 400;
+				font-size: var(--header-size, 2em);
+			}
+
+			.title-text.overlay {
+        		position: absolute;
+        		bottom: 0;
+				color: var(--header-color, #fff);
+      		}
+
+     		:host ::slotted(.card-content) {
+        		padding: 16px;
+        		position:relative;
+      		}
+		</style>
+		<div class="card">
+			<div class="header">
+				<iron-image 
+					hidden$="[[!image]]" 
+					aria-hidden$="[[isHidden(image)]]"
+					src="[[image]]" 
+					alt="[[alt]]" 
+					placeholder="[[placeholderImage]]" 
+					preload$=[[preload]]
+					fade$="[[fade]]"
+					style="width:100%;background:#ccc;">
+				</iron-image>
+
+      			<div hidden$="[[!heading]]" class$="title-text [[headerClass(image)]]">[[heading]]</div>
+			</div>
+			<slot></slot>
+		</div>
+	</template>
+
+	<script>
+		/**
+		 * `simple-card`
+		 * 
+		 *
+		 * @customElement
+		 * @polymer
+		 * @demo demo/index.html
+		 */
+		class SimpleCard extends Polymer.Element {
+			static get is() {
+				return 'simple-card';
+			}
+	
+			static get properties() {
+				return {
+					/**
+					* The title of the card.
+					*/
+					heading: {
+						type: String,
+						value: ''
+					},
+					/**
+					* The url of the title image of the card.
+					*/
+					image: {
+						type: String,
+						value: ''
+					},
+					/**
+					* The text alternative of the card's title image.
+					*/
+					alt: {
+						type: String
+					},
+					/**
+					* When `true`, any change to the image url property will cause the
+					* `placeholder` image to be shown until the image is fully rendered.
+					*/
+					preload: {
+						type: Boolean,
+						value: false
+					},
+					/**
+					* When `preloadImage` is true, setting `fadeImage` to true will cause the
+					* image to fade into place.
+					*/
+					fade: {
+						type: Boolean,
+						value: false
+					},
+					/**
+					* This image will be used as a background/placeholder until the src image has
+					* loaded. Use of a data-URI for placeholder is encouraged for instant rendering.
+					*/
+					placeholderImage: {
+						type: String,
+						value: null
+					}
+				}
+			}
+			
+			/**
+			* Format function for aria-hidden. Use the ! operator results in the
+			* empty string when given a falsy value.
+			*/
+			isHidden(image) {
+				return image ? 'false' : 'true';
+			}
+
+			headerClass(image) {
+        		return image ? ' overlay' : '';
+      		}
+		};
+		
+        customElements.define(SimpleCard.is, SimpleCard);
+	</script>
+</dom-module>
